@@ -1,4 +1,4 @@
-// ============ DADOS (Arrays Paralelos) ============
+// Arrays para armazenar os dados dos livros
 const titulos: string[] = [];
 const autores: string[] = [];
 const anos: number[] = [];
@@ -6,7 +6,7 @@ const paginas: number[] = [];
 const lido: boolean[] = [];
 const avaliacoes: number[] = [];
 
-// ============ POPULANDO COM DADOS INICIAIS ============
+// Dados iniciais - usando push() para adicionar elementos aos arrays
 titulos.push(
   'O Hobbit',
   'Clean Code',
@@ -26,7 +26,7 @@ paginas.push(310, 464, 328, 256, 662);
 lido.push(true, true, false, true, false);
 avaliacoes.push(5, 4, 0, 5, 0);
 
-// ============ FUNÇÕES ============
+// Funções para manipular a biblioteca (adicionar, remover, marcar como lido, avaliar)
 
 // Exibe todos os livros formatados
 function exibirBiblioteca(): void {
@@ -42,7 +42,7 @@ function exibirBiblioteca(): void {
     const estaLido = lido[indice];
     const avaliacao = avaliacoes[indice];
 
-    // Cria a string de status (LIDO ou PENDENTE)
+    // Cria a string de status (lido ou pendente)
     let status = estaLido ? `LIDO (${avaliacao}/5)` : 'PENDENTE';
 
     // Template literal (com ${...}) para formatar a saída
@@ -53,5 +53,56 @@ function exibirBiblioteca(): void {
   });
 }
 
-// ============ EXECUTAR ============
+// Executa a função para exibir a biblioteca no console
+exibirBiblioteca();
+
+/* FUNCIONALIDADES DINAMICAS:adicionar novos livros e remover existentes;
+Manipular arrays com push() e splice()
+Validação com if (ano > 0, páginas > 0)
+Testes das funções                                                          */
+
+function adicionarLivro(titulo: string, autor: string, ano: number, numPaginas: number): void {
+  if (ano > 0 && numPaginas > 0 && titulo.trim() !== '' && autor.trim() !== '') {
+    titulos.push(titulo);
+    autores.push(autor);
+    anos.push(ano);
+    paginas.push(numPaginas);
+    lido.push(false);
+    avaliacoes.push(0);
+    console.log(`✓ Livro "${titulo}" adicionado com sucesso!`);
+  } else {
+    console.log('❌ Dados inválidos. Certifique-se de que o título e autor não estão vazios, e que o ano e páginas são positivos.');
+  }
+}
+
+// Remove um livro pelo índice
+function removerLivro(indice: number): void {
+  if (indice >= 0 && indice < titulos.length) {
+    const tituloRemovido = titulos[indice];
+    titulos.splice(indice, 1);
+    autores.splice(indice, 1);
+    anos.splice(indice, 1);
+    paginas.splice(indice, 1);
+    lido.splice(indice, 1);
+    avaliacoes.splice(indice, 1);
+    console.log(`✓ Livro "${tituloRemovido}" removido com sucesso!`);
+  } else {
+    console.log('❌ Índice inválido. O livro não existe na biblioteca.');
+  }
+}
+
+// ============ TESTES ============
+console.log('\n--- TESTE 1: Exibir biblioteca inicial ---');
+exibirBiblioteca();
+
+console.log('\n--- TESTE 2: Adicionar um novo livro ---');
+adicionarLivro('A Revolução dos Bichos', 'George Orwell', 1945, 152);
+
+console.log('\n--- TESTE 3: Exibir biblioteca com novo livro ---');
+exibirBiblioteca();
+
+console.log('\n--- TESTE 4: Remover um livro (índice 2) ---');
+removerLivro(2);
+
+console.log('\n--- TESTE 5: Exibir biblioteca após remoção ---');
 exibirBiblioteca();
