@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "build": "tsc",
-    "dev": "node --watch dist/index.js",
-    "start": "tsc && node --watch dist/index.js"
-  },
+ "scripts": {
+  "build": "tsc",
+  "dev": "tsc && node --watch dist/index.js",
+  "start": "tsc && node --watch dist/index.js"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
