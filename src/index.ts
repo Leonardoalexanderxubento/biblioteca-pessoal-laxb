@@ -1,3 +1,4 @@
+// ETAPA 2
 // Arrays para armazenar os dados dos livros
 const titulos: string[] = [];
 const autores: string[] = [];
@@ -53,6 +54,8 @@ function exibirBiblioteca(): void {
   });
 }
 
+// ETAPA 3
+
 // Executa a função para exibir a biblioteca no console
 exibirBiblioteca();
 
@@ -91,6 +94,8 @@ function removerLivro(indice: number): void {
   }
 }
 
+// ETAPA 4
+
 // Retorna os índices dos livros que contém o termo no título
 
 function buscarPorTitulo(termo: string): number[] {
@@ -116,3 +121,33 @@ function listarPorAutor(autor: string) : string[] {
     .filter((indice) => autores[indice]!.toLowerCase().includes(autorMinusculo))
     .map((indice) => titulos[indice]!);
 }
+
+// ETAPA 5
+
+// Status de Leitura: Marca um livro como lido e registra a avaliação (1 a 5)
+function marcarComoLido(indice: number, avaliacao: number): void {
+  if (indice < 0 || indice >= titulos.length) {
+    console.log('❌ Índice inválido.');
+    return;
+  }
+  // Valida que a avaliação está entre 1 e 5
+  if (avaliacao < 1 || avaliacao > 5) {
+    console.log('❌ Avaliação inválida. Informe um valor entre 1 e 5.');
+    return;
+  }
+  lido[indice] = true;
+  avaliacoes[indice] = avaliacao;
+  console.log(`✓ "${titulos[indice]}" marcado como lido com avaliação ${avaliacao}/5!`);
+}
+
+// Retorna os títulos de todos os livros lidos
+function listarLidos(): string[] {
+  return titulos.filter((_, indice) => lido[indice]);
+}
+
+// Retorna os títulos de todos os livros ainda não lidos
+function listarPendentes(): string[] {
+  return titulos.filter((_, indice) => !lido[indice]);
+}
+
+// ETAPA 6
