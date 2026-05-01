@@ -206,3 +206,22 @@ function totalPaginasLidas(): number {
 }
 
 // ETAPA 7 
+
+// Agrupa e exibe os livros por década de publicação
+function exibirPorDecada(): void {
+  console.log('\n=== POR DECADA ===\n');
+ 
+  // Calcula a década de cada livro: Math.floor(1937 / 10) * 10 = 1930
+  const decadas = anos.map((ano) => Math.floor(ano / 10) * 10);
+ 
+  // Cria um array com as décadas únicas, ordenadas
+  // Set elimina duplicatas; Array.from converte de volta para array
+  const decadasUnicas = Array.from(new Set(decadas)).sort((a, b) => a - b);
+ 
+  // Para cada década, filtra e exibe os livros correspondentes
+  decadasUnicas.forEach((decada) => {
+    // filter: retorna os títulos cujo índice pertence a esta década
+    const livrosDaDecada = titulos.filter((_, indice) => decadas[indice] === decada);
+    console.log(`${decada}s: ${livrosDaDecada.join(', ')}`);
+  });
+}
