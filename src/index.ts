@@ -225,3 +225,58 @@ function exibirPorDecada(): void {
     console.log(`${decada}s: ${livrosDaDecada.join(', ')}`);
   });
 }
+
+// ETAPA 8
+
+console.log('================================================');
+console.log('       BEM-VINDO À BIBLIOTECA PESSOAL');
+console.log('================================================');
+ 
+// --- Exibição inicial ---
+exibirBiblioteca();
+ 
+// --- Cadastro ---
+console.log('\n=== ADICIONANDO LIVROS ===\n');
+adicionarLivro('O Senhor dos Anéis', 'J.R.R. Tolkien', 1954, 1178);
+adicionarLivro('', 'Autor Inválido', 2020, 200); // deve mostrar erro
+ 
+// --- Remoção ---
+console.log('\n=== REMOVENDO LIVRO ===\n');
+removerLivro(5); // remove "O Senhor dos Anéis" (índice 5)
+removerLivro(99); // índice inválido — deve mostrar erro
+ 
+// --- Marcar como lido ---
+console.log('\n=== MARCANDO COMO LIDO ===\n');
+marcarComoLido(2, 5); // marca "1984" com nota 5
+marcarComoLido(2, 9); // avaliação inválida — deve mostrar erro
+ 
+// --- Exibição após alterações ---
+exibirBiblioteca();
+ 
+// --- Busca e filtros ---
+console.log('\n=== BUSCA POR TITULO: "o" ===\n');
+const resultadosBusca = buscarPorTitulo('o');
+resultadosBusca.forEach((i) => console.log(`  - "${titulos[i]}" (índice ${i})`));
+ 
+console.log('\n=== LIVROS DE TOLKIEN ===\n');
+const tolkien = listarPorAutor('tolkien');
+tolkien.forEach((t) => console.log(`  - ${t}`));
+ 
+// --- Status de leitura ---
+console.log('\n=== LIVROS LIDOS ===\n');
+listarLidos().forEach((t) => console.log(`  ✓ ${t}`));
+ 
+console.log('\n=== LIVROS PENDENTES ===\n');
+listarPendentes().forEach((t) => console.log(`  • ${t}`));
+ 
+// --- Estatísticas ---
+console.log('\n=== ESTATISTICAS ===\n');
+console.log(`Total de livros: ${totalLivros()}`);
+console.log(`Livros lidos: ${totalLidos()} (${percentualLidos().toFixed(2)}%)`);
+console.log(`Media das avaliacoes: ${mediaAvaliacoes().toFixed(2)}`);
+console.log(`Livro melhor avaliado: ${livroMaiorAvaliacao()}`);
+console.log(`Total de paginas lidas: ${totalPaginasLidas()}`);
+ 
+// --- Por década ---
+exibirPorDecada();
+ 
