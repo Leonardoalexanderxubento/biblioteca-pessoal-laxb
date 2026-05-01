@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc --watch",
+    "dev": "ts-node --watch src/index.ts",
+    "start": "ts-node src/index.ts",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,6 +15,7 @@
   "type": "commonjs",
   "devDependencies": {
     "@types/node": "^25.6.0",
+    "ts-node": "^10.9.2",
     "typescript": "^6.0.3"
   }
 }

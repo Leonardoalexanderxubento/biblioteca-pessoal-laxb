@@ -57,7 +57,7 @@ function exibirBiblioteca(): void {
 exibirBiblioteca();
 
 /* FUNCIONALIDADES DINAMICAS:adicionar novos livros e remover existentes;
-Manipular arrays com push() e splice()
+Manipular arrays com push() e splice() (splice é usado para remover elementos);
 Validação com if (ano > 0, páginas > 0)
 Testes das funções                                                          */
 
@@ -91,18 +91,28 @@ function removerLivro(indice: number): void {
   }
 }
 
-// ============ TESTES ============
-console.log('\n--- TESTE 1: Exibir biblioteca inicial ---');
-exibirBiblioteca();
+// Retorna os índices dos livros que contém o termo no título
 
-console.log('\n--- TESTE 2: Adicionar um novo livro ---');
-adicionarLivro('A Revolução dos Bichos', 'George Orwell', 1945, 152);
+function buscarPorTitulo(termo: string): number[] {
+  const termoMinusculo = termo.toLowerCase();
+  const indices: number[] = [];
 
-console.log('\n--- TESTE 3: Exibir biblioteca com novo livro ---');
-exibirBiblioteca();
+  titulos.forEach((titulo, indice) => {
+    if (titulo.toLowerCase().includes(termoMinusculo)) {
+      indices.push(indice);
+    }
+  });
 
-console.log('\n--- TESTE 4: Remover um livro (índice 2) ---');
-removerLivro(2);
+  return indices;
+}
 
-console.log('\n--- TESTE 5: Exibir biblioteca após remoção ---');
-exibirBiblioteca();
+// Retorna os títulos dos livros de um autor específico
+
+function listarPorAutor(autor: string) : string[] {
+  const autorMinusculo = autor.toLowerCase();
+  
+  return autores
+    .map((_, indice) => indice)
+    .filter((indice) => autores[indice]!.toLowerCase().includes(autorMinusculo))
+    .map((indice) => titulos[indice]!);
+}
