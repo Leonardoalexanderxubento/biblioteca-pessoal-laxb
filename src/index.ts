@@ -1,4 +1,5 @@
 // ETAPA 2
+
 // Arrays para armazenar os dados dos livros
 const titulos: string[] = [];
 const autores: string[] = [];
@@ -151,3 +152,57 @@ function listarPendentes(): string[] {
 }
 
 // ETAPA 6
+
+// Retorna o número total de livros na biblioteca
+function totalLivros(): number {
+  return titulos.length;
+}
+
+// Retorna quantos livros foram lidos
+function totalLidos(): number {
+  // filter cria um novo array só com os lidos; length conta os elementos
+  return lido.filter((estaLido) => estaLido).length;
+}
+
+// Retorna o percentual de livros lidos (ex: 60.00)
+function percentualLidos(): number {
+  if (totalLivros() === 0) return 0;
+  return (totalLidos() / totalLivros()) * 100;
+}
+
+// Retorna a média das avaliações apenas dos livros lidos
+function mediaAvaliacoes(): number {
+  // filter: pega só os índices dos livros lidos
+  const indicesLidos = avaliacoes
+    .map((_, i) => i)
+    .filter((i) => lido[i]);
+
+    if (indicesLidos.length === 0) return 0;
+    const somaAvaliacoes = indicesLidos.reduce(
+    (soma, i) => soma + avaliacoes[i]!,
+    0   // valor inicial do acumulador
+  );
+
+    return somaAvaliacoes / indicesLidos.length;
+}
+
+// Retorna o título do livro com maior avaliação
+function livroMaiorAvaliacao(): string {
+  if (titulos.length === 0) return 'Nenhum livro cadastrado';
+
+    // reduce compara avaliações e guarda o índice do maior
+  const indiceMelhor = avaliacoes.reduce((indiceMelhor, avaliacaoAtual, indiceAtual) => {
+    return avaliacaoAtual > avaliacoes[indiceMelhor]! ? indiceAtual : indiceMelhor;
+  }, 0);
+ 
+  return titulos[indiceMelhor]!;
+}
+
+// Retorna o total de páginas dos livros lidos
+function totalPaginasLidas(): number {
+  return paginas
+    .filter((_, indice) => lido[indice])          // mantém só as páginas dos livros lidos
+    .reduce((soma, paginasDoLivro) => soma + paginasDoLivro, 0); // soma todas
+}
+
+// ETAPA 7 
